@@ -11,6 +11,7 @@ public class PlayerGroundedState : PlayerState
 
     private bool _jumpInput;
     private bool _pickUpInput;
+    private bool _putdownInput;
     private bool _flipInput;
     private bool _rotateInput;
 
@@ -60,12 +61,19 @@ public class PlayerGroundedState : PlayerState
         inputY = player.InputHandler.NormalizeInputY;
         _jumpInput = player.InputHandler.JumpInput;
         _pickUpInput = player.InputHandler.PickUpInput;
+        _putdownInput = player.InputHandler.PutDownInput;
         _flipInput = player.InputHandler.FlipInput;
         _rotateInput = player.InputHandler.RotateInput;
 
         ///
         /////////////----- Updating Input
-
+        if(_pickUpInput && core.CollisionSenses.IsPickUpableObject && core.Ability.NumberOfObjectsInHands < playerData.MaxNumberOfObjecs)
+        {
+            stateMachine.ChangeState(player.PickUpState);
+        }else if(_putdownInput && core.Ability.NumberOfObjectsInHands > 0)
+        {
+            stateMachine.ChangeState(player.PutDownState);
+        }
         if (_jumpInput && player.JumpState.CanJump() && !isTouchingCelling)
         {
 

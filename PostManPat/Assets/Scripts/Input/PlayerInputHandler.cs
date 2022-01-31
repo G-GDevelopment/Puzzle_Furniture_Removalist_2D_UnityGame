@@ -13,6 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpInputStop { get; private set; }
 
     public bool PickUpInput { get; private set; }
+    public bool PutDownInput { get; private set; }
     public bool RotateInput { get; private set; }
     public bool FlipInput { get; private set; }
 
@@ -60,6 +61,18 @@ public class PlayerInputHandler : MonoBehaviour
             PickUpInput = false;
         }
     }
+    public void OnPutDownInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            PutDownInput = true;
+        }
+
+        if (context.canceled)
+        {
+            PutDownInput = false;
+        }
+    }
     public void OnFlipInput(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -87,6 +100,8 @@ public class PlayerInputHandler : MonoBehaviour
     }
     public void SetJumpInputToFalse() => JumpInput = false;
     public void SetFlipInputToFalse() => FlipInput = false;
+    public void SetPickUpToFalse() => PickUpInput = false;
+    public void SetPutDownToFalse() => PutDownInput = false;
 
 
     private void CheckJumpInputHoldTime()

@@ -18,13 +18,17 @@ public class CollisionSenses : CoreComponents
     [SerializeField] private Transform _groundChecker;
     [SerializeField] private Transform _wallChecker;
     [SerializeField] private Transform _cellingChecker;
+    [SerializeField] private Transform _handsChecker;
 
+
+    [SerializeField] private float _handsDistance;
     [SerializeField] private float _cellingCheckRadius;
     [SerializeField] private float _groundCheckRadius;
     [SerializeField] private float _wallCheckDistance;
 
 
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private LayerMask _pickUpLayer;
 
 
 
@@ -50,6 +54,16 @@ public class CollisionSenses : CoreComponents
     public bool WallBack
     {
         get => Physics2D.Raycast(_wallChecker.position, Vector2.right * -core.Movement.FacingDirection, _wallCheckDistance, _groundLayer);
+    }
+
+    public bool IsPickUpableObject
+    {
+        get => Physics2D.Raycast(_handsChecker.position, Vector2.right * core.Movement.FacingDirection, _handsDistance, _pickUpLayer);
+    }
+
+    public RaycastHit2D HandsRaycast()
+    {
+        return Physics2D.Raycast(_handsChecker.position, Vector2.right * core.Movement.FacingDirection, _handsDistance, _pickUpLayer);
     }
     #endregion
 }

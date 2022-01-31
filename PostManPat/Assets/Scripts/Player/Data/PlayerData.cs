@@ -24,7 +24,6 @@ public class PlayerData : ScriptableObject
     [Header("WallSlide Parameter")]
     public float WallSlideVelocity = 3.0f;
 
-
-    
-    //[Header("Ability Parameter")]
+    [Header("Ability Parameter")]
+    public int MaxNumberOfObjecs = 2;
 }

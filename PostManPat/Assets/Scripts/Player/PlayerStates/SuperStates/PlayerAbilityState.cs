@@ -38,6 +38,7 @@ public class PlayerAbilityState : PlayerState
     public override void StandardUpdate()
     {
         base.StandardUpdate();
+
         if (!isExistingState)
         {
             if (isAbilityDone)
